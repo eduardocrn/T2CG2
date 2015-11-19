@@ -1,5 +1,6 @@
 package objects;
 
-public class Basket {
-
+public class Basket extends GameObject {
+	
+	
 }
