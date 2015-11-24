@@ -262,7 +262,9 @@ static void draw( void )
     glTranslatef( +150, 0, 0 );
 
     glTranslatef( x, y, z );
-    glutSolidSphere(20.0, 20, 20);
+    if(z > -20){
+        glutSolidSphere(20.0, 20, 20);
+    }
 
 
 
