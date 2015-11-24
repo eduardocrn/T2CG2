@@ -5,6 +5,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 #ifndef __APPLE__
 #include <GL/gl.h>
 #include <GL/glut.h>
@@ -16,6 +18,8 @@
 #include <AR/video.h>
 #include <AR/param.h>
 #include <AR/ar.h>
+#include <time.h>
+
 
 //
 // Camera configuration.
@@ -31,6 +35,7 @@ int             thresh = 100;
 int             count = 0;
 
 
+
 char           *cparam_name    = "Data/camera_para.dat";
 ARParam         cparam;
 
@@ -43,14 +48,49 @@ double          patt_width     = 80.0;
 double          patt_center[2] = {0.0, 0.0};
 double          patt_trans[3][4];
 
+
+double x = 0.0,y = 0.0, z= 0.0;
+
+
+void delay(int milliseconds);
 static void   init(void);
 static void   cleanup(void);
 static void   keyEvent( unsigned char key, int x, int y);
 static void   mainLoop(void);
 static void   draw( void );
 
+
+
+
+
+
+DWORD WINAPI updateFrame(LPVOID lpParam)
+{
+    double zpower = 1.5;
+    while(1){
+        zpower -= 0.02;
+        z += zpower;
+        x -= 1.0;
+        Sleep(17);
+
+    }
+
+}
+
 int main(int argc, char **argv)
 {
+    DWORD dwThreadId, dwThrdParam = 1;
+    HANDLE hThread;
+
+    hThread = CreateThread(
+    NULL, // default security attributes
+    0, // use default stack size
+    updateFrame, // thread function
+    &dwThrdParam, // argument to thread function
+    0, // use default creation flags
+    &dwThreadId); // returns the thread identifier
+
+
 
     printf ("Diretorio corrente:");
 #ifdef WIN32
@@ -210,10 +250,14 @@ static void draw( void )
     glMaterialfv(GL_FRONT, GL_SHININESS, mat_flash_shiny);
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
     glMatrixMode(GL_MODELVIEW);
-    glTranslatef( 0.0, 0.0, 25.0 );
+
+    glTranslatef( x, y, z );
     glutSolidSphere(20.0, 20, 20);
 
 
     glDisable( GL_LIGHTING );
     glDisable( GL_DEPTH_TEST );
 }
+
+
+

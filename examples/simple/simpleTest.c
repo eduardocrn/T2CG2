@@ -60,6 +60,7 @@ int main(int argc, char **argv)
 #endif
     printf("\n");
 
+
     glutInit(&argc, argv);
     init();
 
