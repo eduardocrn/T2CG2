@@ -252,7 +252,12 @@ static void draw( void )
     glMatrixMode(GL_MODELVIEW);
 
     glTranslatef( -150, 0, 0 );
-    glutSolidTorus(1.0, 27.0, 15, 15);
+    int i =0;
+    while( i < 50){
+        glTranslatef( 0, 0, 1);
+        glutSolidTorus(1.0, 27.0, 15, 15);
+        i+=1;
+    }
 
     glTranslatef( +150, 0, 0 );
 
