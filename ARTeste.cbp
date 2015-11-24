@@ -45,7 +45,7 @@
 			<Add library="lib\libim_captur.a" />
 			<Add directory="lib" />
 		</Linker>
-		<Unit filename="examples/simple/simpleTest.c">
+		<Unit filename="examples/multi/multiTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
