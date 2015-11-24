@@ -251,8 +251,15 @@ static void draw( void )
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
     glMatrixMode(GL_MODELVIEW);
 
+    glTranslatef( -150, 0, 0 );
+    glutSolidTorus(1.0, 27.0, 15, 15);
+
+    glTranslatef( +150, 0, 0 );
+
     glTranslatef( x, y, z );
     glutSolidSphere(20.0, 20, 20);
+
+
 
 
     glDisable( GL_LIGHTING );
